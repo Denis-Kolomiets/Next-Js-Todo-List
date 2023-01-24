@@ -1,10 +1,13 @@
 .container {
   width: 700px;
-  margin: 0 auto;
+  margin: 50px auto 0 auto;
   display: flex;
   flex-direction: column;
   align-items: center;
   font-size: 30px;
+
+  background-color: rgb(168, 200, 200);
+  border-radius: 10px;
 }
 
 .input {
@@ -30,10 +33,10 @@
 }
 
 .todo {
+  position: relative;
   width: 600px;
   display: flex;
   align-items: center;
-  justify-content: space-between;
   padding: 10px 20px;
   margin: 15px 0;
   font-size: 1.5rem;
@@ -52,4 +55,75 @@
   font-size: 30px;
   border-radius: 10px;
   transition: 0.3s ease-in;
+}
+
+.btn_del {
+  position: absolute;
+  right: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 5px 5px;
+  font-size: 30px;
+  border-radius: 10px;
+}
+
+.check {
+  display: block;
+  position: relative;
+  top: -7px;
+  padding-left: 35px;
+  cursor: pointer;
+  font-size: 22px;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+}
+.check input {
+  position: absolute;
+  opacity: 0;
+  cursor: pointer;
+  height: 0;
+  width: 0;
+}
+
+.checkmark {
+  position: absolute;
+  top: -7px;
+  left: 0;
+  height: 25px;
+  width: 25px;
+  background-color: rgb(227, 227, 227);
+  box-shadow: 2px 2px 2px;
+}
+
+.check:hover input ~ .checkmark {
+  background-color: #ccc;
+}
+
+.check input:checked ~ .checkmark {
+  background-color: #2196f3;
+}
+
+.checkmark:after {
+  content: '';
+  position: absolute;
+  display: none;
+}
+
+.check input:checked ~ .checkmark:after {
+  display: block;
+}
+
+.check .checkmark:after {
+  left: 10px;
+  top: 7px;
+  width: 5px;
+  height: 10px;
+  border: solid white;
+  border-width: 0 3px 3px 0;
+  -webkit-transform: rotate(45deg);
+  -ms-transform: rotate(45deg);
+  transform: rotate(45deg);
 }
