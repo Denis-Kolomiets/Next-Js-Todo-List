@@ -14,15 +14,26 @@ export default function Home({ todosAPI }) {
   const [todos, setTodos] = useState([...todosAPI])
   const onSubmitHandler = (e) => {
     e.preventDefault()
-    const newTodo = {
-      text: value,
-      id: uuidv4(),
+    if (value) {
+      const newTodo = {
+        text: value,
+        id: uuidv4(),
+      }
+      setTodos([...todos, newTodo])
+      setValue('')
     }
-    setTodos([...todos, newTodo])
-    setValue('')
   }
   const deleteTodoHandler = (id) => {
     setTodos(todos.filter((todo) => todo.id != id))
+  }
+  const toggleDisabled = (id) => {
+    setTodos(
+      todos.map((todo) => {
+        return todo.id === id
+          ? { ...todo, completed: !todo.completed }
+          : { ...todo }
+      })
+    )
   }
   return (
     <>
@@ -30,13 +41,17 @@ export default function Home({ todosAPI }) {
         <title>Todo List App</title>
       </Head>
       <main className={styles.container}>
-        <h1>Todo List NextJs</h1>
+        <h1>Todo List Next.js</h1>
         <TodoForm
           onSubmitHandler={onSubmitHandler}
           setValue={setValue}
           value={value}
         />
-        <TodoList todos={todos} deleteTodoHandler={deleteTodoHandler} />
+        <TodoList
+          todos={todos}
+          deleteTodoHandler={deleteTodoHandler}
+          toggleDisabled={toggleDisabled}
+        />
       </main>
     </>
   )
